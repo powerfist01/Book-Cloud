@@ -1,0 +1,170 @@
+<html>
+	<head>
+		<title>Book Cloud</title>
+		<link rel="stylesheet" href="/static/css/main.css">
+		<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+	</head>
+	<body>
+		<div class="container-fluid">
+			<div class="container-fluid">
+				<nav class="navbar navbar-expand-lg navbar-light bg-dark">		
+					<a class="navbar-brand" href="/"><h3 style="color:red;">BookCloud</h3></a>
+					<a style="margin-left: 1000px" href="/upload" class="btn btn-secondary btn-md active" role="button" aria-pressed="true">Upload</a>
+				</nav>
+			</div>
+			<br>
+
+			<div class="container">
+				<div class="row">
+					<div class="col align-self-start"></div>
+					<div class="col align-self-center"><h2>Search Here</h2>
+						<form action="/search" method="get" class="form-inline">
+							<input type="text" class="form-control" placeholder="Enter Name of Book" 
+							name="query">
+							<input class="form-control btn btn-primary" type="submit" value="Search">
+						</form>
+					</div>	
+					<div class="col align-self-right"></div>			
+				</div>		
+			</div>						
+			<br>
+
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 align-self-right">
+						{% if data or data1%}
+							<h4>Book List </h4>
+							<ol>
+								{% for filename,count in data %}
+								<div id="id-{{ loop.index0 }}">	
+									<li value=" {{ loop.index }} "><a style="text-decoration:none;" href="/book/{{filename}}">{{ filename }}</a>
+									</li>
+								</div>
+								{% endfor %}
+							</ol>	
+						</div>	
+						{% endif %}
+
+						{% if search_data %}
+						<div class="container">
+							<div class="row">
+									<h4>Search Results</h4>
+									<table class="table">
+										<thead class="thead-dark">
+								    		<tr>
+								      			<th scope="col">No.</th>
+								      			<th scope="col">Name</th>
+								      
+								    		</tr>
+								  		</thead>
+								 		<tbody>
+										{% for filename,count in search_data %}
+										<tr>
+		    								<th scope="row">{{loop.index}}.</th>
+											<td>
+												<a style="text-decoration:none; " href="/book/{{filename}}">{{ filename }}</a>
+											</td>
+										</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+							</div>
+						</div>
+						{% endif %}
+
+
+						{% if data or data1 %}
+						<div class="col-md-4" style="margin-left: 100px"><h4>Popular Downloads</h4>
+							<table class="table">
+								<thead class="thead-dark">
+						 	   	<tr>
+						      		<th scope="col">No.</th>
+						      		<th scope="col">Name</th>
+						      		<th scope="col">Downloads</th>
+						    	</tr>
+						  		</thead>
+							 	<tbody>
+								{% for filename,count in data1 %}
+	    							<tr>
+	    								<th scope="row">{{loop.index}}.</th>
+										<td>
+											<a style="text-decoration:none; " href="/book/{{filename}}">{{ filename }}</a>
+										</td>
+										<td>{{ count }}</td>
+									</tr>
+							
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+				
+				<br>
+
+				{% if data or data1 %}
+				<div class="container">
+					<div class="row">
+						<div class="col align-self-start">
+							<nav aria-label="Page navigation example" id="booklist">
+							  <ul class="pagination">
+							    <li class="page-item"><a onclick="left_button()" class="page-link">Previous</a></li>
+							    <li class="page-item"><a onclick="right_button()" class="page-link">Next</a></li>
+							  </ul>
+							</nav>
+						</div>
+					</div>
+				</div>
+				{% endif %}
+		</div>
+		<div id="number_of_books" style="display: none">
+			{{ data2 }}
+		</div>
+
+		<script>
+	       var i=0;
+	       let number_of_books=document.getElementById("number_of_books").innerText;
+	       for (let j=0;j<number_of_books;j++){
+	       		var x = document.getElementById("id-"+j);
+				x.style.display="none";
+				console.log("hiding book: ",x);
+	       }
+
+			function show_ten(l) {
+				for(let j=l;j<l+10 && j<number_of_books;j++){
+					var x = document.getElementById("id-"+j);
+					x.style.display="block";
+					console.log(x);
+				}
+			}	
+
+			function hide_ten(j) {
+				for (let k=j; k<j+10 && k<number_of_books; k++) {
+					var x = document.getElementById("id-"+k);
+					x.style.display="none";
+					console.log(x);
+				}
+			}
+			function left_button() {
+				console.log("left clicked i: ",i);
+				if (i != 0) {
+					hide_ten(i);
+					i = i - 10;
+					show_ten(i);
+				}
+			}
+			function right_button() {
+
+				console.log("right clicked i: ",i);
+				if (i+10<=number_of_books){
+					hide_ten(i);
+					i = i + 10;
+					show_ten(i);
+				}
+			}
+			show_ten(0);
+	</script>
+
+	</body>
+</html>

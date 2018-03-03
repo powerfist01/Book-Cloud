@@ -1,0 +1,19 @@
+* {
+	margin: 0px;
+  padding: 0px;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+	background-color: red;
+}
+
+#uploadbutton {
+ position: absolute;
+ margin-left: 800px;
+}
+#right{
+	position: absolute;
+	margin-right: 800px;
+}
