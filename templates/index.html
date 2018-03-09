@@ -31,7 +31,7 @@
 
 			<div class="container">
 				<div class="row">
-					<div class="col-md-6 align-self-right">
+					<div class="col-md-4 align-self-right">
 						{% if data or data1%}
 							<h4>Book List </h4>
 							<ol>
@@ -44,35 +44,7 @@
 							</ol>	
 						</div>	
 						{% endif %}
-
-						{% if search_data %}
-						<div class="container">
-							<div class="row">
-									<h4>Search Results</h4>
-									<table class="table">
-										<thead class="thead-dark">
-								    		<tr>
-								      			<th scope="col">No.</th>
-								      			<th scope="col">Name</th>
-								      
-								    		</tr>
-								  		</thead>
-								 		<tbody>
-										{% for filename,count in search_data %}
-										<tr>
-		    								<th scope="row">{{loop.index}}.</th>
-											<td>
-												<a style="text-decoration:none; " href="/book/{{filename}}">{{ filename }}</a>
-											</td>
-										</tr>
-										{% endfor %}
-										</tbody>
-									</table>
-							</div>
-						</div>
-						{% endif %}
-
-
+					<div class="col-md-1"></div>
 						{% if data or data1 %}
 						<div class="col-md-4" style="margin-left: 100px"><h4>Popular Downloads</h4>
 							<table class="table">
@@ -101,6 +73,32 @@
 					</div>
 				</div>
 				
+				{% if search_data %}
+						<div class="container">
+							<div class="row">
+									<h4>Search Results</h4>
+									<table class="table">
+										<thead class="thead-dark">
+								    		<tr>
+								      			<th scope="col">No.</th>
+								      			<th scope="col">Name</th>
+								      
+								    		</tr>
+								  		</thead>
+								 		<tbody>
+										{% for filename,count in search_data %}
+										<tr>
+		    								<th scope="row">{{loop.index}}.</th>
+											<td>
+												<a style="text-decoration:none; " href="/book/{{filename}}">{{ filename }}</a>
+											</td>
+										</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+							</div>
+						</div>
+						{% endif %}
 				<br>
 
 				{% if data or data1 %}
@@ -121,6 +119,14 @@
 		<div id="number_of_books" style="display: none">
 			{{ data2 }}
 		</div>
+
+		<footer class="bd-footer text-muted">
+  			<div class="container-fluid p-3 p-md-5">
+     		 		<img src="github.png" alt="Sorry" href="https://github.com/powerfist01/Book-Cloud">
+     		 		<br>
+    			<p>Designed and built with all the love in the world.</p>
+  			</div>
+		</footer>
 
 		<script>
 	       var i=0;

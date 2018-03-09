@@ -26,11 +26,12 @@ def get_all_filenames():
 
 @app.route('/')
 def index():
-    cursor=conn.execute("""SELECT NAME, COUNT FROM BOOKS """)
+    cursor=conn.execute("""SELECT NAME, COUNT FROM BOOKS ORDER BY ID DESC""")
     result = []
     for name,count in cursor:
         result.append((name,count))
     print(result)
+
     popular=conn.execute("""SELECT NAME, COUNT FROM BOOKS ORDER BY COUNT DESC LIMIT 10""")
     top = []
     for name,count in popular:
