@@ -49,6 +49,7 @@ def book(filename):
     print("count increases")
     return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
 
+
 @app.route('/search')
 def search():
     query = request.args.get("query").lower()
