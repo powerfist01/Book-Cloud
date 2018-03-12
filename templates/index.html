@@ -32,76 +32,54 @@
 
 			<div class="container">
 				<div class="row">
-					<div class="col-md-4 align-self-right">
-						{% if data or data1%}
+					<div class="col-md-6 align-self-right">
+					{% if data or data1%}
 							<h4>Book List</h4>
-							<ol>
+							<br>
+							<table class="table">
+						 		<tbody>
 								{% for filename,count in data %}
-								<div id="id-{{ loop.index0 }}">	
-									<li value=" {{ loop.index }} "><a style="text-decoration:none;" href="/book/{{filename}}">{{ filename }}</a>
-									</li>
-								</div>
+								<tr class="id-{{ loop.index0 }}">
+									<th scope="row">
+										<div>{{ loop.index }}.</div>
+									</th>
+									<td>
+										<a style="text-decoration:none;" href="/book/{{filename}}">{{ filename }}</a>
+									</td>
+								</tr>
 								{% endfor %}
-							</ol>	
-						</div>	
-						{% endif %}
-						
-					<div class="col-md-1"></div>
-
+							</tbody>
+						</table>
+					</div>	
+					{% endif %}
+					
 						{% if data or data1 %}
 						<div class="col-md-4" style="margin-left: 100px"><h4>Popular Downloads</h4>
-							<table class="table">
-								<thead class="thead-dark">
-						 	   	<tr>
-						      		<th scope="col">No.</th>
-						      		<th scope="col">Name</th>
-						      		<th scope="col">Downloads</th>
-						    	</tr>
-						  		</thead>
-							 	<tbody>
-								{% for filename,count in data1 %}
-	    							<tr>
-	    								<th scope="row">{{loop.index}}.</th>
-										<td>
-											<a style="text-decoration:none; " href="/book/{{filename}}">{{ filename }}</a>
-										</td>
-										<td>{{ count }}</td>
-									</tr>
-							
-								{% endfor %}
-								</tbody>
+						<table class="table">
+						<thead class="thead-dark">
+						    <tr>
+						      <th scope="col">No.</th>
+						      <th scope="col">Name</th>
+						      <th scope="col">Downloads</th>
+						    </tr>
+						  </thead>
+						 <tbody>
+							{% for filename,count in data1 %}
+    						<tr>
+    							<th scope="row">{{loop.index}}.</th>
+							<td>
+							<a style="text-decoration:none; " href="/book/{{filename}}">{{ filename }}</a>
+							</td>
+							<td>{{ count }}</td>
+								</tr>
+						
+							{% endfor %}
+						</tbody>
 							</table>
-						</div>
+					</div>
 						{% endif %}
 					</div>
 				</div>
-				
-				{% if search_data %}
-						<div class="container">
-							<div class="row">
-									<h4>Search Results</h4>
-									<table class="table">
-										<thead class="thead-dark">
-								    		<tr>
-								      			<th scope="col">No.</th>
-								      			<th scope="col">Name</th>
-								      
-								    		</tr>
-								  		</thead>
-								 		<tbody>
-										{% for filename,count in search_data %}
-										<tr>
-		    								<th scope="row">{{loop.index}}.</th>
-											<td>
-												<a style="text-decoration:none; " href="/book/{{filename}}">{{ filename }}</a>
-											</td>
-										</tr>
-										{% endfor %}
-										</tbody>
-									</table>
-							</div>
-						</div>
-						{% endif %}
 				<br>
 
 				{% if data or data1 %}
@@ -119,6 +97,33 @@
 				</div>
 				{% endif %}
 		</div>
+
+		{% if search_data %}
+						<div class="container">
+							<div class="row">
+									<h4>Search Results</h4>
+									<table class="table">
+										<thead class="thead-dark">
+								    		<tr>
+								      			<th scope="col">No.</th>
+								      			<th scope="col">Name</th>
+								    		</tr>
+								  		</thead>
+								 		<tbody>
+										{% for filename,count in search_data %}
+										<tr>
+		    								<th scope="row">{{loop.index}}.</th>
+											<td>
+												<a style="text-decoration:none; " href="/book/{{filename}}">{{ filename }}</a>
+											</td>
+										</tr>
+										{% endfor %}
+										</tbody>
+									</table>
+							</div>
+						</div>
+						{% endif %}
+				<br>
 		<div id="number_of_books" style="display: none">
 			{{ data2 }}
 		</div>
@@ -137,14 +142,14 @@
 	       var i=0;
 	       let number_of_books=document.getElementById("number_of_books").innerText;
 	       for (let j=0;j<number_of_books;j++){
-	       		var x = document.getElementById("id-"+j);
+	       		var x = document.getElementsByClassName("id-"+j)[0];
 				x.style.display="none";
 				console.log("hiding book: ",x);
 	       }
 
 			function show_ten(l) {
 				for(let j=l;j<l+10 && j<number_of_books;j++){
-					var x = document.getElementById("id-"+j);
+					var x = document.getElementsByClassName("id-"+j)[0];
 					x.style.display="block";
 					console.log(x);
 				}
@@ -152,7 +157,7 @@
 
 			function hide_ten(j) {
 				for (let k=j; k<j+10 && k<number_of_books; k++) {
-					var x = document.getElementById("id-"+k);
+					var x = document.getElementsByClassName("id-"+k)[0];
 					x.style.display="none";
 					console.log(x);
 				}
