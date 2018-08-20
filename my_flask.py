@@ -3,7 +3,7 @@ from flask import render_template, request, flash, redirect, url_for
 from flask import send_from_directory
 from werkzeug.utils import secure_filename
 import sqlite3
-conn=sqlite3.connect("book.db")
+conn=sqlite3.connect("book.db",check_same_thread=False)
 from os import walk, path
 
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
@@ -86,4 +86,4 @@ def db():
         print(row)
     return "Hello"
 
-app.run(port = 8000, host = '0.0.0.0',debug=False)
+app.run(port = 8000, host = '127.0.0.1',debug=False)
